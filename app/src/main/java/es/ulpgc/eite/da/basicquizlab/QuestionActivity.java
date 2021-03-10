@@ -94,7 +94,6 @@ public class QuestionActivity extends AppCompatActivity {
       } else {
         replyText.setText(R.string.incorrect_text);
       }
-
     } else { // has pulasado false o ninguno
 
       if(!nextButtonEnabled) {

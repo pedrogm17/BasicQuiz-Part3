@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CheatActivity extends AppCompatActivity {
@@ -15,11 +16,14 @@ public class CheatActivity extends AppCompatActivity {
   public final static String EXTRA_ANSWER = "EXTRA_ANSWER";
   public final static String EXTRA_CHEATED = "EXTRA_CHEATED";
 
+  public final static String KEY_ANSWER_CHEATED = "ANSWER_CHEATED";
+
   private Button noButton, yesButton;
   private TextView answerText;
 
   private int currentAnswer;
   private boolean answerCheated;
+  private boolean buttonPressed;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -74,20 +78,29 @@ public class CheatActivity extends AppCompatActivity {
     yesButton.setEnabled(false);
     noButton.setEnabled(false);
     answerCheated = true;
+    buttonPressed = true;
 
     if(currentAnswer == 0) {
       answerText.setText(R.string.false_text);
     } else {
       answerText.setText(R.string.true_text);
-
     }
   }
 
   private void onNoButtonClicked() {
     yesButton.setEnabled(false);
     noButton.setEnabled(false);
+    buttonPressed = true;
 
     returnCheatedStatus();
+  }
+
+
+  @Override
+  protected void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+
+    outState.putBoolean(KEY_ANSWER_CHEATED, answerCheated);
   }
 
 }
