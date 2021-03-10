@@ -35,6 +35,7 @@ public class CheatActivity extends AppCompatActivity {
     initLayoutData();
 
     linkLayoutComponents();
+    updateLayoutContent();
     enableLayoutButtons();
   }
 
@@ -75,24 +76,32 @@ public class CheatActivity extends AppCompatActivity {
 
 
   private void onYesButtonClicked() {
-    yesButton.setEnabled(false);
-    noButton.setEnabled(false);
     answerCheated = true;
     buttonPressed = true;
 
-    if(currentAnswer == 0) {
-      answerText.setText(R.string.false_text);
-    } else {
-      answerText.setText(R.string.true_text);
-    }
+    updateLayoutContent();
   }
 
   private void onNoButtonClicked() {
-    yesButton.setEnabled(false);
-    noButton.setEnabled(false);
     buttonPressed = true;
 
-    returnCheatedStatus();
+    updateLayoutContent();
+  }
+
+  private void updateLayoutContent() {
+    if (buttonPressed){
+      yesButton.setEnabled(false);
+      noButton.setEnabled(false);
+      if(answerCheated){
+        if(currentAnswer == 0) {
+          answerText.setText(R.string.false_text);
+        } else {
+          answerText.setText(R.string.true_text);
+        }
+      }else{
+        returnCheatedStatus();
+      }
+    }
   }
 
 
