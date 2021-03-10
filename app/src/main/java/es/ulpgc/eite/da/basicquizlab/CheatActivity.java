@@ -17,6 +17,7 @@ public class CheatActivity extends AppCompatActivity {
   public final static String EXTRA_CHEATED = "EXTRA_CHEATED";
 
   public final static String KEY_ANSWER_CHEATED = "ANSWER_CHEATED";
+  public final static String KEY_BUTTON_PRESSED = "BUTTON_PRESSED";
 
   private Button noButton, yesButton;
   private TextView answerText;
@@ -31,6 +32,11 @@ public class CheatActivity extends AppCompatActivity {
     setContentView(R.layout.activity_cheat);
 
     getSupportActionBar().setTitle(R.string.cheat_title);
+
+    if(savedInstanceState != null){
+      answerCheated = savedInstanceState.getBoolean(KEY_ANSWER_CHEATED);
+      buttonPressed = savedInstanceState.getBoolean(KEY_BUTTON_PRESSED);
+    }
 
     initLayoutData();
 
@@ -110,6 +116,8 @@ public class CheatActivity extends AppCompatActivity {
     super.onSaveInstanceState(outState);
 
     outState.putBoolean(KEY_ANSWER_CHEATED, answerCheated);
+    outState.putBoolean(KEY_BUTTON_PRESSED, buttonPressed);
+
   }
 
 }
